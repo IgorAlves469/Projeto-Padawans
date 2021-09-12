@@ -1,0 +1,56 @@
+<!-- +++++++++++++ TO - DOs +++++++++++++++++ -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title> TO - DOs </title>
+    <!--CSS: usando o CSS do Bootstrap e um pessoal-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="Estilo.css">
+    <!--Puxando o script do ajax/jquery para usar ao puxar a API-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        let vetor = [];
+
+        $.ajax({
+            method: 'GET',
+            url: 'https://jsonplaceholder.typicode.com/todos',
+            success: function (response) {
+                vetor = response
+                constroiTabela(vetor);
+                console.log(vetor);
+            }
+        })
+        function constroiTabela(dados) {
+            let tabela = document.getElementById('tabelaTODOs');
+
+            for (let x = 0; x < dados.length; x++) {
+                let row = `<tr>
+							<td>${dados[x].userId}</td>
+                            <td>${dados[x].id}</td>
+							<td>${dados[x].title}</td>
+					  </tr>`
+                tabela.innerHTML += row;
+            }
+        }
+    </script>
+</head>
+
+<body>
+     <h1 class="centro">TO - DOs</h1>
+    <table style="color: #fffffe;" class="table table-bordered table-dark>
+        <thead class="thead-dark">
+        <tr class="centro">
+            <th>USERID</th>
+            <th>ID</th>
+            <th>TITLE</th>
+        </thead>
+        </tr>
+        <tbody id="tabelaTODOs" class="centro"> </tbody>
+    </table>
+    <br>
+    <button class="btn btn-light"><a href="Index.html"> Voltar </a></button>
+</body>
+
+</html>
